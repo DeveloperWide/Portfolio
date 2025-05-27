@@ -5,7 +5,9 @@ import Home from "./pages/Home"
 import Services from "./pages/Services"
 import Footer from "./layouts/Footer";
 import Navbar from "./layouts/Navbar"
-
+import Pricing from "./pages/Pricing"
+import Contact from "./pages/Contact"
+import Newsletter from "./pages/Newsletter"
 
 function App() {
   return (
@@ -14,7 +16,10 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />}/>
       <Route path="/services" element={<Services />}/>
+      <Route path="/pricing" element={<Pricing />}/>
+      <Route path="/contact" element={<Contact />}/>
     </Routes>
+    <Newsletter />
     <Footer/>
    </>
   )
