@@ -1,33 +1,22 @@
-// models/Contact.js
-const mongoose = require("mongoose");
-const {Schema , model} = mongoose;
+const mongooose = require("mongoose");
+const {Schema , model} = mongooose;
 
-
-const contactSchema = new Schema(
+const newsletterSchema = new Schema(
   {
-    name: {
-      type: String,
-      required: true,
-      trim: true,
-    },
     email: {
       type: String,
       required: true,
+      unique: true,
       lowercase: true,
       trim: true,
     },
-    message: {
-      type: String,
-      required: true,
-      maxlength: 1000,
-    },
-    responded: {
-      type: Boolean,
-      default: false,
+    subscribedAt: {
+      type: Date,
+      default: Date.now,
     },
   },
   { timestamps: true }
 );
 
-const Contact = model("Contact", contactSchema);
-module.exports = Contact;
+const Newsletter = model("Newsletter", newsletterSchema);
+module.exports = Newsletter;

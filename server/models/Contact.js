@@ -1,23 +1,32 @@
-// models/Newsletter.js
-const mongooose = require("mongoose");
-const {Schema , model} = mongooose;
+// models/Contact.js
+const mongoose = require("mongoose");
+const {Schema , model} = mongoose;
 
-const newsletterSchema = new Schema(
+const contactSchema = new Schema(
   {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
     email: {
       type: String,
       required: true,
-      unique: true,
       lowercase: true,
       trim: true,
     },
-    subscribedAt: {
-      type: Date,
-      default: Date.now,
+    message: {
+      type: String,
+      required: true,
+      maxlength: 1000,
+    },
+    responded: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }
 );
 
-const Newsletter = model("Newsletter", newsletterSchema);
-module.exports = Newsletter;
+const Contact = model("Contact", contactSchema);
+module.exports = Contact;
