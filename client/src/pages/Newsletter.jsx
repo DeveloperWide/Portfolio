@@ -1,6 +1,22 @@
+import axios from "axios";
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const Newsletter = () => {
+    let [email , setEmail] = useState("");
+    const onSubmitHandler = () => {
+        useEffect(() => {
+            axios.post(`${import.meta.env.VITE_API_PATH}/user/email`).then((res) => {
+                console.log(res.data)
+            }).catch((err) => {
+                console.log(err)
+            })
+        })
+    }
+
+
+
     return (
         <div className="flex md:flex-row flex-col border border-gray-500/30 rounded-lg items-start md:items-center justify-between gap-5 text-sm max-w-5xl bg-white p-8 mx-auto mb-20">
             {/* Left Section */}
@@ -15,7 +31,7 @@ const Newsletter = () => {
                         type="text"
                         placeholder="Enter your email"
                     />
-                    <button className="bg-indigo-500 hover:bg-indigo-600 transition-all px-6 py-2 rounded text-white font-medium">
+                    <button onSubmit={onSubmitHandler} className="bg-indigo-500 hover:bg-indigo-600 transition-all px-6 py-2 rounded text-white font-medium">
                         Subscribe
                     </button>
                 </div>
@@ -37,7 +53,7 @@ const Newsletter = () => {
                     <h3 className="text-base font-medium text-gray-800">Weekly articles</h3>
                 </div>
                 <p className="text-gray-500">
-                    Not labor is the result of great labors. Likewise, not desire is the desire of two things.        
+                    Not labor is the result of great labors. Likewise, not desire is the desire of two things.
                 </p>
             </div>
 
