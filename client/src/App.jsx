@@ -8,6 +8,8 @@ import Navbar from "./layouts/Navbar"
 import Pricing from "./pages/Pricing"
 import Contact from "./pages/Contact"
 import Newsletter from "./pages/Newsletter"
+import Users from "./pages/Users"
+import EmialList from "./pages/EmailList"
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
       <Route path="/services" element={<Services />}/>
       <Route path="/pricing" element={<Pricing />}/>
       <Route path="/contact" element={<Contact />}/>
+      <Route path="/users" element={<Users />}/>
+      <Route path="/emails" element={<EmialList />}/>
     </Routes>
     <Newsletter />
     <Footer/>

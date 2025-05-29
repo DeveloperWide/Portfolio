@@ -1,18 +1,43 @@
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
-import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 const Newsletter = () => {
-    let [email , setEmail] = useState("");
-    const onSubmitHandler = () => {
-        useEffect(() => {
-            axios.post(`${import.meta.env.VITE_API_PATH}/user/email`).then((res) => {
-                console.log(res.data)
+    let [data, setData] = useState({
+        email: ""
+    });
+
+    const onChangeHandler = (e) => {
+        setData((prevObj) => {
+            return { ...prevObj, [e.target.name]: e.target.value }
+        });
+    }
+    const onSubmitHandler = async (e) => {
+        e.preventDefault();
+        try {
+            axios.post(`${import.meta.env.VITE_API_PATH}/user/email`, data).then((res) => {
+                setData({
+                    email: ""
+                })
+                Swal.fire({
+                    title: "Success!",
+                    text: res.data.message,
+                    icon: "success",
+                    confirmButtonText: "Cool",
+                });
+
             }).catch((err) => {
-                console.log(err)
+                Swal.fire({
+                    title: "Error!",
+                    text: err.response.data.message,
+                    icon: "error",
+                    confirmButtonText: "Cool",
+                });
             })
-        })
+        } catch (err) {
+            console.log(err)
+        }
     }
 
 
@@ -25,15 +50,20 @@ const Newsletter = () => {
                 <p className="text-gray-500 mt-2">
                     We love all things except in our own little way, and whoever wants to gain them will. Two things happen at the same time, in pain.
                 </p>
-                <div className="flex items-center gap-4 mt-10">
-                    <input
-                        className="py-2 px-3 w-full outline-none focus:border-indigo-500/60 transition max-w-64 border border-gray-500/30 rounded-md"
-                        type="text"
-                        placeholder="Enter your email"
-                    />
-                    <button onSubmit={onSubmitHandler} className="bg-indigo-500 hover:bg-indigo-600 transition-all px-6 py-2 rounded text-white font-medium">
-                        Subscribe
-                    </button>
+                <div className="">
+                    <form onSubmit={onSubmitHandler} className="flex items-center gap-4 mt-10">
+                        <input
+                            className="py-2 px-3 w-full outline-none focus:border-indigo-500/60 transition max-w-64 border border-gray-500/30 rounded-md"
+                            type="text"
+                            value={data.email}
+                            name="email"
+                            onChange={onChangeHandler}
+                            placeholder="Enter your email"
+                        />
+                        <button type="submit" className="bg-indigo-700  transition-all px-6 py-2 rounded text-white font-medium hover:bg-indigo-600 cursor-pointer">
+                            Subscribe
+                        </button>
+                    </form>
                 </div>
             </div>
 

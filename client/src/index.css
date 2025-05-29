@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+.table, .table-header, .table-data{
+    @apply border border-black py-3 px-4 font-semibold;
+}
